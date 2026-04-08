@@ -1,11 +1,11 @@
-# City REST API (Go + Gin)
+ City REST API (Go + Gin)
 
 A clean, production-style REST API built with Go and the Gin web framework.
 This project serves city data from a JSON source and demonstrates how to structure a scalable backend application.
 
 ---
 
-# Features
+ Features
 
 * Retrieve all cities
 * Get a city by name
@@ -15,7 +15,7 @@ This project serves city data from a JSON source and demonstrates how to structu
 
 ---
 
-## 🛠️ Tech Stack
+# Tech Stack
 
 * Go (Golang)
 * Gin Web Framework
