@@ -51,3 +51,30 @@ func (s *CityService) GetByCountry(country string) []models.City {
     }
     return result
 }
+
+/*
+
+1. CityService Struct
+- Stores a slice of cities loaded from the JSON data file.
+- Acts as the service layer for city-related operations.
+
+2. NewCityService()
+- Reads the "data/cities.json" file.
+- Parses the JSON into Go structs using json.Unmarshal.
+- Loads all cities into memory and returns a new CityService instance.
+- Uses panic() to stop execution if file reading or JSON parsing fails.
+
+3. GetAll()
+- Returns all cities stored in the service.
+
+4. GetByName(name string)
+- Searches for a city by its name.
+- Uses strings.EqualFold() for case-insensitive comparison.
+- Returns a pointer to the matching city if found.
+- Returns nil if no matching city exists.
+
+5. GetByCountry(country string)
+- Filters cities by country name.
+- Uses case-insensitive comparison.
+- Returns a slice containing all matching cities.
+*/
