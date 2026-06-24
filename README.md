@@ -1,31 +1,33 @@
- City REST API (Go + Gin)
+# City REST API (Go + Gin)
 
-A clean, production-style REST API built with Go and the Gin web framework.
-This project serves city data from a JSON source and demonstrates how to structure a scalable backend application.
+A clean and lightweight REST API built with **Go (Golang)** and the **Gin web framework**.
+
+This project provides structured access to city data stored in a JSON file and demonstrates how to design a scalable backend using layered architecture principles.
 
 ---
 
- Features
+#  Features
 
 * Retrieve all cities
 * Get a city by name
 * Filter cities by country
-* Clean architecture (handlers, services, models, routes)
-* Fast and lightweight API using Gin
+* Clean layered architecture (handlers, services, models, routes)
+* Fast and lightweight HTTP API using Gin
+* JSON-based data source
 
 ---
 
-# Tech Stack
+#  Tech Stack
 
 * Go (Golang)
 * Gin Web Framework
-* JSON (data source)
+* JSON (data storage format)
 
 ---
 
-# Project Structure
+#  Project Structure
 
-```
+```bash id="structure1"
 .
 ├── main.go
 ├── data/
@@ -36,27 +38,120 @@ This project serves city data from a JSON source and demonstrates how to structu
 └── routes/
 ```
 
+---
 
+#  Architecture Overview
+
+```text id="arch1"
+Client Request
+      ↓
+Gin Router
+      ↓
+Route Layer
+      ↓
+Handler Layer (HTTP Controllers)
+      ↓
+Service Layer (Business Logic)
+      ↓
+JSON Data Source
+```
+
+This layered design ensures:
+
+* Separation of concerns
+* Easy maintainability
+* Scalable project structure
 
 ---
 
+#  API Features
 
+## Cities
+
+### Get all cities
+
+```http id="api1"
+GET /cities
+```
+
+### Get city by name
+
+```http id="api2"
+GET /cities/:name
+```
+
+### Filter by country
+
+```http id="api3"
+GET /cities?country=Netherlands
+```
+
+---
+
+#  Getting Started
+
+## 1. Clone the repository
+
+```bash id="setup1"
+git clone https://github.com/your-username/city-rest-api.git
+cd city-rest-api
+```
+
+---
+
+## 2. Install dependencies
+
+```bash id="setup2"
+go mod tidy
+```
+
+---
+
+## 3. Run the server
+
+```bash id="run1"
+go run main.go
+```
+
+Server runs at:
+
+```text id="run2"
+http://localhost:8080
+```
+
+---
+
+#  Future Improvements
 
 * Add pagination and sorting
-* Connect to a database (PostgreSQL)
-* Add environment configuration
-* Implement logging & middleware
+* Integrate PostgreSQL database
+* Add environment configuration (.env support)
+* Implement structured logging and middleware
 * Add unit and integration tests
 * Dockerize the application
+* Add Swagger/OpenAPI documentation
 
 ---
 
+#  Learning Context
 
+This project is part of my Go backend learning journey.
 
-This project is part of my Go learning path.
-
-I first built a simpler version focused on:
+It started as a simple API focused on:
 
 * JSON parsing
-* Basic Gin routes
+* Basic Gin routing
+* HTTP request handling
 
+and evolved into a structured backend using layered architecture principles.
+
+---
+
+#  What This Project Demonstrates
+
+* REST API development in Go
+* Gin framework usage
+* Clean architecture principles
+* Layered backend design
+* Basic data modeling and filtering logic
+* Scalable API structure design
