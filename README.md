@@ -1,157 +1,423 @@
-# City REST API (Go + Gin)
+# City REST API
 
-A clean and lightweight REST API built with **Go (Golang)** and the **Gin web framework**.
+![Go](https://img.shields.io/badge/Go-1.x-00ADD8?logo=go)
+![Gin](https://img.shields.io/badge/Gin-Web_Framework-008ECF)
+![REST API](https://img.shields.io/badge/API-REST-green)
+![JSON](https://img.shields.io/badge/Data-JSON-lightgrey)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-This project provides structured access to city data stored in a JSON file and demonstrates how to design a scalable backend using layered architecture principles.
+A lightweight REST API built with Go and the Gin web framework.
 
----
-
-#  Features
-
-* Retrieve all cities
-* Get a city by name
-* Filter cities by country
-* Clean layered architecture (handlers, services, models, routes)
-* Fast and lightweight HTTP API using Gin
-* JSON-based data source
+The service provides structured access to city data through a clean backend architecture focused on maintainability, separation of concerns, and scalable API design.
 
 ---
 
-#  Tech Stack
+# Overview
 
-* Go (Golang)
-* Gin Web Framework
-* JSON (data storage format)
+City REST API demonstrates how to build a backend service using Go with a layered architecture approach.
+
+The application workflow:
+
+```text
+Client Request
+
+      ↓
+
+Gin Router
+
+      ↓
+
+HTTP Handlers
+
+      ↓
+
+Service Layer
+
+      ↓
+
+Data Repository
+
+      ↓
+
+JSON Storage
+```
+
+The project focuses on backend fundamentals:
+
+- REST API design
+- request handling
+- service abstraction
+- data modeling
+- clean project organization
 
 ---
 
-#  Project Structure
+# Features
 
-```bash id="structure1"
-.
+## City Retrieval
+
+Provides endpoints for:
+
+- retrieving all cities
+- searching cities by name
+- filtering cities by country
+
+---
+
+## RESTful API Design
+
+The API follows standard HTTP principles:
+
+- resource-based routes
+- structured responses
+- clear endpoint responsibilities
+
+---
+
+## Layered Architecture
+
+The application separates:
+
+```text
+Routes
+
+↓
+
+Handlers
+
+↓
+
+Services
+
+↓
+
+Data Layer
+```
+
+Benefits:
+
+- easier maintenance
+- improved testability
+- clearer responsibilities
+- future database migration support
+
+---
+
+# Architecture
+
+## Router Layer
+
+Responsible for:
+
+- defining API routes
+- mapping requests to handlers
+
+Example:
+
+```text
+GET /cities
+
+GET /cities/:name
+
+GET /cities?country=value
+```
+
+---
+
+## Handler Layer
+
+Responsible for:
+
+- processing HTTP requests
+- validating parameters
+- returning API responses
+
+---
+
+## Service Layer
+
+Contains application logic:
+
+- filtering cities
+- searching records
+- transforming data
+
+Keeping logic outside handlers makes the API easier to extend.
+
+---
+
+## Data Layer
+
+Currently uses JSON storage.
+
+Responsibilities:
+
+- loading city records
+- providing structured data access
+
+The design allows future replacement with:
+
+- PostgreSQL
+- MongoDB
+- external APIs
+
+---
+
+# Project Structure
+
+```text
+city-rest-api/
+
 ├── main.go
+│
 ├── data/
 │   └── cities.json
+│
 ├── models/
+│
 ├── services/
+│
 ├── handlers/
-└── routes/
+│
+├── routes/
+│
+└── README.md
 ```
 
 ---
 
-#  Architecture Overview
+# API Documentation
 
-```text id="arch1"
-Client Request
-      ↓
-Gin Router
-      ↓
-Route Layer
-      ↓
-Handler Layer (HTTP Controllers)
-      ↓
-Service Layer (Business Logic)
-      ↓
-JSON Data Source
-```
+## Get All Cities
 
-This layered design ensures:
-
-* Separation of concerns
-* Easy maintainability
-* Scalable project structure
-
----
-
-#  API Features
-
-## Cities
-
-### Get all cities
-
-```http id="api1"
+```http
 GET /cities
 ```
 
-### Get city by name
+Returns:
 
-```http id="api2"
-GET /cities/:name
-```
-
-### Filter by country
-
-```http id="api3"
-GET /cities?country=Netherlands
+```json
+[
+  {
+    "name": "Amsterdam",
+    "country": "Netherlands"
+  }
+]
 ```
 
 ---
 
-#  Getting Started
+## Get City By Name
 
-## 1. Clone the repository
+```http
+GET /cities/:name
+```
 
-```bash id="setup1"
+Example:
+
+```http
+GET /cities/Amsterdam
+```
+
+---
+
+## Filter Cities By Country
+
+```http
+GET /cities?country=Netherlands
+```
+
+Example response:
+
+```json
+[
+  {
+    "name": "Amsterdam",
+    "country": "Netherlands"
+  }
+]
+```
+
+---
+
+# Tech Stack
+
+## Backend
+
+- Go
+- Gin Web Framework
+
+## Data
+
+- JSON storage
+
+## API Style
+
+- REST architecture
+
+---
+
+# Engineering Highlights
+
+This project demonstrates:
+
+- Go backend development
+- REST API implementation
+- layered architecture
+- HTTP request handling
+- service abstraction
+- data modeling
+- maintainable project structure
+
+---
+
+# Design Decisions
+
+## Separation of Responsibilities
+
+Business logic is separated from HTTP concerns.
+
+Example:
+
+```text
+Handler
+
+"Receive request"
+
+        ↓
+
+Service
+
+"Process data"
+
+        ↓
+
+Repository
+
+"Access storage"
+```
+
+This improves:
+
+- code organization
+- testing capability
+- scalability
+
+---
+
+## JSON-Based Storage
+
+The project starts with a lightweight data source.
+
+Advantages:
+
+- simple development setup
+- easy testing
+- portable dataset
+
+The architecture supports migration to a database without rewriting the API layer.
+
+---
+
+# Getting Started
+
+## Clone Repository
+
+```bash
 git clone https://github.com/your-username/city-rest-api.git
+
 cd city-rest-api
 ```
 
 ---
 
-## 2. Install dependencies
+## Install Dependencies
 
-```bash id="setup2"
+```bash
 go mod tidy
 ```
 
 ---
 
-## 3. Run the server
+## Run Application
 
-```bash id="run1"
+```bash
 go run main.go
 ```
 
-Server runs at:
+Server starts:
 
-```text id="run2"
+```text
 http://localhost:8080
 ```
 
 ---
 
-#  Future Improvements
+# Future Improvements
 
-* Add pagination and sorting
-* Integrate PostgreSQL database
-* Add environment configuration (.env support)
-* Implement structured logging and middleware
-* Add unit and integration tests
-* Dockerize the application
-* Add Swagger/OpenAPI documentation
+## Database Integration
+
+- PostgreSQL support
+- repository abstraction
+- database migrations
 
 ---
 
-#  Learning Context
+## API Improvements
 
-This project is part of my Go backend learning journey.
-
-It started as a simple API focused on:
-
-* JSON parsing
-* Basic Gin routing
-* HTTP request handling
-
-and evolved into a structured backend using layered architecture principles.
+- pagination
+- sorting
+- advanced filtering
+- request validation
+- OpenAPI documentation
 
 ---
 
-#  What This Project Demonstrates
+## Production Features
 
-* REST API development in Go
-* Gin framework usage
-* Clean architecture principles
-* Layered backend design
-* Basic data modeling and filtering logic
-* Scalable API structure design
+- environment configuration
+- structured logging
+- middleware support
+- authentication
+- rate limiting
+- Docker deployment
+
+---
+
+## Testing
+
+- unit tests
+- handler tests
+- integration tests
+- API contract testing
+
+---
+
+# Learning Context
+
+This project represents a progression into Go backend development.
+
+It explores:
+
+- building HTTP services
+- designing backend layers
+- structuring maintainable Go applications
+- applying software engineering principles
+
+---
+
+# What This Project Demonstrates
+
+City REST API demonstrates:
+
+- REST API development in Go
+- Gin framework usage
+- backend architecture design
+- clean separation of concerns
+- scalable service organization
+
+---
+
+# License
+
+MIT License
